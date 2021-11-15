@@ -1,5 +1,8 @@
 package it.unibo.oop.lab.mvcio;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintStream;
 
 
 /**
@@ -35,10 +38,22 @@ public class Controller {
      */
     
     public void setCurrent(String file) {
-        this.actual = PATH + file;
+        this.actual = file;
     }
     
     public String getCurrent() {
         return this.actual;
     }
+    
+    public String getPath() {
+        return PATH + this.actual;
+    }
+    
+    public void write(final String arg) throws IOException{
+        
+        PrintStream ps = new PrintStream(this.getPath());
+        ps.print(arg);
+
+    }
+    
 }
