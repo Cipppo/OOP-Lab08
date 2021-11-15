@@ -1,10 +1,16 @@
 package it.unibo.oop.lab.mvcio;
 
+
+
 /**
  * 
  */
 public class Controller {
-
+    
+    private static final String PATH = System.getProperty("user.home")
+            + System.getProperty("file.separator");
+    
+    private String actual = null;
     /*
      * This class must implement a simple controller responsible of I/O access. It
      * considers a single file at a time, and it is able to serialize objects in it.
@@ -27,5 +33,12 @@ public class Controller {
      * System.getProperty("file.separator"). The combined use of those methods leads
      * to a software that runs correctly on every platform.
      */
-
+    
+    public void setCurrent(String file) {
+        this.actual = PATH + file;
+    }
+    
+    public String getCurrent() {
+        return this.actual;
+    }
 }
