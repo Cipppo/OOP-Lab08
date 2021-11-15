@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Random;
 
@@ -14,7 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
+import java.nio.file.*;
 /**
  * This class is a simple application that writes a random number on a file.
  * 
@@ -48,6 +49,8 @@ public class BadIOGUI {
         canvas.add(canvas2, BorderLayout.CENTER);
         canvas2.add(write);
         
+        final JButton read = new JButton("Read from file");
+        canvas2.add(read);
         /*
          * Handlers
          */
@@ -65,6 +68,20 @@ public class BadIOGUI {
                     ps.print(rng.nextInt());
                 } catch (FileNotFoundException e1) {
                     JOptionPane.showMessageDialog(frame, e1, "Error", JOptionPane.ERROR_MESSAGE);
+                    e1.printStackTrace();
+                }
+            }
+        });
+        
+        read.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Hai premuto il tasto lolololololo");
+                
+                try {
+                    System.out.println(Files.readAllLines(Path.of(PATH)));
+                } catch (IOException e1) {
                     e1.printStackTrace();
                 }
             }
