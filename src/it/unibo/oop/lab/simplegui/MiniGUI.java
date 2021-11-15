@@ -5,14 +5,17 @@ package it.unibo.oop.lab.simplegui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.TextField;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  * This class is a simple application that writes a random number on a file.
@@ -27,6 +30,7 @@ public class MiniGUI {
     private static final int PROPORTION = 5;
     private final Random rng = new Random();
     private final JFrame frame = new JFrame(TITLE);
+    private final String CONST = "Result: ";
 
     /**
      * 
@@ -38,13 +42,23 @@ public class MiniGUI {
         canvas.add(write, BorderLayout.CENTER);
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        final JPanel canvas2 = new JPanel();
+        canvas2.setLayout(new BoxLayout(canvas2, BoxLayout.X_AXIS));
+        canvas.add(canvas2, BorderLayout.CENTER);
+        canvas2.add(write, BorderLayout.CENTER);
+        
+        final JTextField tfield = new JTextField("Result: ");
+        canvas.add(tfield, BorderLayout.NORTH);
+        
         /*
          * Handlers
          */
         write.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                System.out.println(rng.nextInt());
+                final Integer ran = rng.nextInt();
+                tfield.setText(CONST + ran.toString());
             }
         });
     }
@@ -68,6 +82,7 @@ public class MiniGUI {
          * on screen. Results may vary, but it is generally the best choice.
          */
         frame.setLocationByPlatform(true);
+        frame.pack();
         /*
          * OK, ready to pull the frame onscreen
          */
