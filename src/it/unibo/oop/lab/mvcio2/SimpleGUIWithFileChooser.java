@@ -77,8 +77,12 @@ public final class SimpleGUIWithFileChooser {
         
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
-        frame.setLocationByPlatform(true);
+      
         
+    }
+    
+    public static void main(String[] args) {
+        new SimpleGUIWithFileChooser().display();
     }
 
 }
