@@ -13,7 +13,7 @@ public class Controller {
     private static final String PATH = System.getProperty("user.home")
             + System.getProperty("file.separator");
     
-    private String actual = null;
+    private String actual = "output.txt";
     /*
      * This class must implement a simple controller responsible of I/O access. It
      * considers a single file at a time, and it is able to serialize objects in it.
@@ -51,9 +51,9 @@ public class Controller {
     
     public void write(final String arg) throws IOException{
         
-        PrintStream ps = new PrintStream(this.getPath());
+        final PrintStream ps = new PrintStream(this.getPath());
         ps.print(arg);
-
+        
     }
     
 }
