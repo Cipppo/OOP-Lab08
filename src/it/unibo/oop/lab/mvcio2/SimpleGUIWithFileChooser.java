@@ -8,8 +8,11 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import it.unibo.oop.lab.mvcio.Controller;;
 /**
@@ -55,6 +58,16 @@ public final class SimpleGUIWithFileChooser {
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
+        final JPanel canvas2 = new JPanel();
+        canvas2.setLayout(new BorderLayout());
+        final JTextField text = new JTextField();
+        text.setEditable(false);
+        text.setText(controller.getCurrent());
+        final JButton browse = new JButton("Browse");
+        canvas2.add(text, BorderLayout.CENTER);
+        canvas2.add(browse, BorderLayout.LINE_END);
+        canvas.add(canvas2, BorderLayout.NORTH);
+        
         save.addActionListener(new ActionListener() {
             
             @Override
@@ -65,6 +78,22 @@ public final class SimpleGUIWithFileChooser {
                     e1.printStackTrace();
                 }
                 
+            }
+        });
+        
+        browse.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser browser = new JFileChooser();
+                final int res = browser.showSaveDialog(browser);
+                if(res == JFileChooser.APPROVE_OPTION) {
+                    controller.setCurrent(browser.getSelectedFile().getName());
+                    text.setText(browser.getSelectedFile().getName());
+                }else {
+                    JOptionPane.showMessageDialog(browse, "An error has occured "
+                                                + "while selecting the file");
+                }
             }
         });
     }
