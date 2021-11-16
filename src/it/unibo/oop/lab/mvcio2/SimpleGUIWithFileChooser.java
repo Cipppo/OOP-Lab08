@@ -1,11 +1,26 @@
 package it.unibo.oop.lab.mvcio2;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import it.unibo.oop.lab.mvcio.Controller;;
 /**
  * A very simple program using a graphical interface.
  * 
  */
 public final class SimpleGUIWithFileChooser {
-
+    
+    private final JFrame frame = new JFrame();
+    private final Controller controller = new Controller();
+    
     /*
      * TODO: Starting from the application in mvcio:
      * 
@@ -31,5 +46,39 @@ public final class SimpleGUIWithFileChooser {
      * update the UI: in this example the UI knows when should be updated, so
      * try to keep things separated.
      */
+    
+    public SimpleGUIWithFileChooser() {
+        final JPanel canvas = new JPanel();
+        canvas.setLayout(new BorderLayout());
+        final JButton save = new JButton("save");
+        canvas.add(save, BorderLayout.SOUTH);
+        frame.setContentPane(canvas);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        save.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    controller.write("OK");
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                
+            }
+        });
+    }
+    
+    public void display() {
+        final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+        final int sw = (int) screen.getWidth();
+        final int sh = (int) screen.getHeight();
+        frame.setSize(sw / 2, sh / 2);
+        
+        frame.setLocationByPlatform(true);
+        frame.setVisible(true);
+        frame.setLocationByPlatform(true);
+        
+    }
 
 }
