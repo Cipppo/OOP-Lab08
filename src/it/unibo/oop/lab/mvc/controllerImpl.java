@@ -5,8 +5,8 @@ import java.util.List;
 
 public class controllerImpl implements Controller{
     
-    private String current = null;
-    private List<String> history = new ArrayList<>();
+    private String current;
+    private final List<String> history = new ArrayList<>();
 
     @Override
     public void setNext(final String arg) throws IllegalArgumentException {
