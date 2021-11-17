@@ -23,8 +23,11 @@ public class controllerImpl implements Controller{
 
     @Override
     public String getHistory() {
-        
-        return this.history.toString();
+        if(!history.isEmpty()) {
+            return this.history.toString();
+        }else {
+            return " ";
+        }
     }
 
     @Override
