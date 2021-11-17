@@ -13,6 +13,8 @@ public class controllerImpl implements Controller{
         this.current = arg;
         if(this.current != null) {
             history.add(current);
+        }else {
+            new IllegalArgumentException();
         }
     }
 
