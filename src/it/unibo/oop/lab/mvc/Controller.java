@@ -31,7 +31,7 @@ public interface Controller {
     
     String getNext();
     
-    List<String> getHistory();
+    String getHistory();
     
     void printCurrent();
     
