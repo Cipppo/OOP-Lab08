@@ -3,10 +3,13 @@ package it.unibo.oop.lab.mvc;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
@@ -16,6 +19,7 @@ import javax.swing.JTextField;
 public final class SimpleGUI {
 
     private final JFrame frame = new JFrame();
+    private final Controller controller = new controllerImpl();
 
     /*
      * Once the Controller is done, implement this class in such a way that:
@@ -49,6 +53,8 @@ public final class SimpleGUI {
         canvas2.setLayout(new BorderLayout());
         
         final JTextField text = new JTextField();
+        text.setEditable(false);
+        final JTextArea tArea = new JTextArea();
         
         final JButton button1 = new JButton("Print");
         final JButton button2 = new JButton("History");
@@ -57,12 +63,35 @@ public final class SimpleGUI {
         
         
         canvas.add(text, BorderLayout.NORTH);
+        canvas.add(tArea, BorderLayout.CENTER);
         canvas2.add(button1, BorderLayout.LINE_START);
         canvas2.add(button2, BorderLayout.LINE_END);
         canvas.add(canvas2, BorderLayout.SOUTH);
         frame.setContentPane(canvas);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         
+        
+        button2.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                text.setText(controller.getHistory());
+            }
+        });
+        
+        button1.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    controller.setNext(tArea.getText());
+                    text.setText(controller.getNext());
+                }catch(IllegalArgumentException e1){
+                    System.out.println("Null values are not permitted");
+                }
+            }
+        });
         
         /*
          * Make the frame half the resolution of the screen. This very method is

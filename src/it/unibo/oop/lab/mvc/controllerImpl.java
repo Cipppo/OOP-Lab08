@@ -14,7 +14,7 @@ public class controllerImpl implements Controller{
         if(this.current != null) {
             history.add(current);
         }else {
-            new IllegalArgumentException();
+            throw new IllegalArgumentException();
         }
     }
 
