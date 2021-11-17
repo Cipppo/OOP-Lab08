@@ -1,11 +1,12 @@
 package it.unibo.oop.lab.mvc;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class controllerImpl implements Controller{
     
     private String current = null;
-    private List<String> history;
+    private List<String> history = new ArrayList<>();
 
     @Override
     public void setNext(final String arg) throws IllegalArgumentException {
@@ -22,6 +23,7 @@ public class controllerImpl implements Controller{
 
     @Override
     public String getHistory() {
+        
         return this.history.toString();
     }
 
